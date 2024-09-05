@@ -1,5 +1,21 @@
 ##SQL 
 
+create table T19 (
+	State text,
+	Constituencies text,
+	candidates varchar(100),
+	Sex text ,
+	age int,
+	category text,
+	party varchar(50),
+	party_symbol varchar(50),
+	genral_votes int,
+	postal_votes int,
+	total_votes int,
+	total_electors int
+)
+
+
 TOP 5 STATE IN 2014 HIGHEST VOTER TURNOUT RATIO
   WITH CTE AS(
   SELECT
