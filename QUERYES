@@ -50,14 +50,14 @@ TOP 5 STATE IN 2014 HIGHEST VOTER TURNOUT RATIO
 
 WITH CTE AS(
 SELECT
-	STATE,PC_NAME AS constituency,
+	STATE,constituencies,
 	SUM(TOTAL_VOTES) AS VOTES,
-	SUM(DISTINCT(TOTAL_ELECTROL)) AS ELECTROLS
+	SUM(DISTINCT(TOTAL_ELECTORS)) AS ELECTORS
 from
-	T20141
-group by STATE,constituency)
+	nt14
+group by STATE,constituencies)
 
-SELECT STATE,constituency,VOTES,ELECTROLS, round((cast(votes*100 as decimal)/electrols),2) AS RATIO
+SELECT STATE,constituencies,VOTES,ELECTORS, round((cast(votes*100 as decimal)/electors),2) AS RATIO
 FROM CTE
 order by ratio DESC
 limit 5
@@ -66,16 +66,16 @@ limit 5
 
 WITH CTE AS(
 SELECT
-	STATE,PC_NAME AS constituency,
+	STATE,constituencies,
 	SUM(TOTAL_VOTES) AS VOTES,
-	SUM(DISTINCT(TOTAL_ELECTROL)) AS ELECTROLS
+	SUM(DISTINCT(TOTAL_ELECTORS)) AS ELECTORS
 from
-	T20141
-group by STATE,constituency)
+	nt14
+group by STATE,constituencies)
 
-SELECT STATE,constituency,VOTES,ELECTROLS, round((cast(votes*100 as decimal)/electrols),2) AS RATIO
+SELECT STATE,constituencies,VOTES,ELECTORS, round((cast(votes*100 as decimal)/electors),2) AS RATIO
 FROM CTE
-order by ratio ASC
+order by ratio 
 limit 5
 	
 	
