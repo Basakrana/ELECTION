@@ -78,4 +78,64 @@ FROM CTE
 order by ratio 
 limit 5
 	
-	
+### top state in 2019
+
+WITH CTE AS(
+  SELECT
+  	STATE,
+  	SUM(TOTAL_VOTES) AS VOTES,
+  	SUM(DISTINCT(TOTAL_ELECTORS)) AS ELECTORS
+  from
+  	nt19
+  group by state)
+  
+  SELECT STATE,VOTES,ELECTORS, round((cast(votes*100 as decimal)/electors),2) AS RATIO
+  FROM CTE
+  order by ratio desc
+  limit 5
+
+### bottom state in 2019
+
+WITH CTE AS(
+  SELECT
+  	STATE,
+  	SUM(TOTAL_VOTES) AS VOTES,
+  	SUM(DISTINCT(TOTAL_ELECTORS)) AS ELECTORS
+  from
+  	nt19
+  group by state)
+  
+  SELECT STATE,VOTES,ELECTORS, round((cast(votes*100 as decimal)/electors),2) AS RATIO
+  FROM CTE
+  order by ratio
+  limit 5
+
+### top constituences in 2019
+WITH CTE AS(
+SELECT
+	STATE,constituencies,
+	SUM(TOTAL_VOTES) AS VOTES,
+	SUM(DISTINCT(TOTAL_ELECTORS)) AS ELECTORS
+from
+	nt19
+group by STATE,constituencies)
+
+SELECT STATE,constituencies,VOTES,ELECTORS, round((cast(votes*100 as decimal)/electors),2) AS RATIO
+FROM CTE
+order by ratio DESC
+limit 5
+
+bottom constituencies in 2019
+WITH CTE AS(
+SELECT
+	STATE,constituencies,
+	SUM(TOTAL_VOTES) AS VOTES,
+	SUM(DISTINCT(TOTAL_ELECTORS)) AS ELECTORS
+from
+	nt19
+group by STATE,constituencies)
+
+SELECT STATE,constituencies,VOTES,ELECTORS, round((cast(votes*100 as decimal)/electors),2) AS RATIO
+FROM CTE
+order by ratio 
+limit 5
